@@ -2,83 +2,84 @@ package algorithm;
 
 public class HuiSu {
 
-	/**
-	 * @param args
-	 */
-	//°Ë»ÊºóÎÊÌâ
-	static int n;
-	static int[] x;
-	static long sum;
-	
-	private static boolean place(int k){//ÓÃÓÚÅĞ¶ÏµÚkĞĞµÄµÚx[k]ÁĞÊÇ·ñ¿ÉÒÔ·Å»Êºó
-		for(int j = 1; j < k; j ++){
-			if(Math.abs(k - j) == Math.abs(x[j] - x[k]) || x[j] == x[k]){
-				return false;
-			}
-		}
-		return true;
-	}
-	//µİ¹é·½Ê½
-	public static long nQueen(int nn){
-		n = nn;
-		sum = 0;
-		x = new int[n + 1];
-		for(int i = 0; i <= n; i ++){
-			x[i] = 0;
-		}
-		backtrack(1);
-		return sum;
-	}
-	
-	private static void backtrack(int t){
-		if(t > n){
-			sum ++;
-		}else{
-			for(int i = 1; i <= n; i ++){
-				x[t] = i;
-				if(place(t)){
-					backtrack(t + 1);
-				}
-			}
-		}
-	}
-	
+    /**
+     * @param args
+     */
+    //ï¿½Ë»Êºï¿½ï¿½ï¿½ï¿½ï¿½
+    static int n;
+    static int[] x;
+    static long sum;
 
-	//·Çµİ¹é·½Ê½
-	public static long nQueen2(int nn){
-		n = nn;
-		sum = 0;
-		x = new int[n + 1];
-		for(int i = 0; i <= n; i ++){
-			x[i] = 0;
-		}
-		backtrack();
-		return sum;
-	}
-	
-	private static void backtrack() {
-		x[1] = 0;
-		int k = 1;
-		while(k > 0){
-			x[k] += 1;
-			while((x[k] <= n) && !place(k)){
-				x[k] += 1;
-			}
-			if(x[k] <= n){
-				if(k == n){
-					sum ++;
-				}else{
-					k ++;
-					x[k] = 0;
-				}
-			}else{
-				k --;
-			}
-		}
-	}
+    private static boolean place(int k) {//ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶Ïµï¿½kï¿½ĞµÄµï¿½x[k]ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ô·Å»Êºï¿½
+        for (int j = 1; j < k; j++) {
+            if (Math.abs(k - j) == Math.abs(x[j] - x[k]) || x[j] == x[k]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //ï¿½İ¹é·½Ê½
+    public static long nQueen(int nn) {
+        n = nn;
+        sum = 0;
+        x = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            x[i] = 0;
+        }
+        backtrack(1);
+        return sum;
+    }
+
+    private static void backtrack(int t) {
+        if (t > n) {
+            sum++;
+        } else {
+            for (int i = 1; i <= n; i++) {
+                x[t] = i;
+                if (place(t)) {
+                    backtrack(t + 1);
+                }
+            }
+        }
+    }
 
 
-	public static void main(String[] args) {
-		
-	}
+    //ï¿½Çµİ¹é·½Ê½
+    public static long nQueen2(int nn) {
+        n = nn;
+        sum = 0;
+        x = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            x[i] = 0;
+        }
+        backtrack();
+        return sum;
+    }
+
+    private static void backtrack() {
+        x[1] = 0;
+        int k = 1;
+        while (k > 0) {
+            x[k] += 1;
+            while ((x[k] <= n) && !place(k)) {
+                x[k] += 1;
+            }
+            if (x[k] <= n) {
+                if (k == n) {
+                    sum++;
+                } else {
+                    k++;
+                    x[k] = 0;
+                }
+            } else {
+                k--;
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println("hello HuiSu");
+    }
 }

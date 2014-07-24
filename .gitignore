@@ -213,3 +213,10 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/nbproject/private/
+.idea/
+build.xml
+manifest.xml
+.iml
+nbproject/
+out/

@@ -10,6 +10,7 @@ public class Sort {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static int partition(Comparable[] a, int p, int r) {
 		int i = p;
 		int j = r + 1;
@@ -29,6 +30,7 @@ public class Sort {
 		return j;
 	}
 
+	@SuppressWarnings("rawtypes")
 	private static void swap(Comparable[] a, int i, int j) {
 		Comparable t = a[i];
 		a[i] = a[j];
@@ -37,6 +39,7 @@ public class Sort {
 	}
 
 	// ------------------���ָ������������İ汾
+	@SuppressWarnings("rawtypes")
 	private static int randomizedPartition(Comparable[] a, int p, int r) {
 		int i = random(p, r);
 		swap(a, i, p);
@@ -49,6 +52,7 @@ public class Sort {
 		return Math.round((float) Math.random() * a) + p;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static void randomizedQuickSort(Comparable[] a, int p, int r) {
 		if (p < r) {
 			int q = randomizedPartition(a, p, r);
