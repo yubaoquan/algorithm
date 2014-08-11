@@ -216,7 +216,7 @@ pip-log.txt
 /nbproject/private/
 .idea/
 build.xml
-manifest.xml
-.iml
+manifest.mf
+*.iml
 nbproject/
 out/
