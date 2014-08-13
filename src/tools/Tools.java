@@ -1,9 +1,9 @@
 package tools;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
-import aha_chanllenge.Challenge1;
 import static java.lang.System.*;
 
 public class Tools {
@@ -13,19 +13,19 @@ public class Tools {
 		array[i] = array[j];
 		array[j] = temp;
 	}
-	
+
 	public static int[] generateArray(int len) {
 		int[] array = new int[len];
 		Random ran = new Random();
-		
-		for (int i = 0; i < len; i ++) {
+
+		for (int i = 0; i < len; i++) {
 			array[i] = ran.nextInt(len);
 		}
 		return array;
 	}
-	
+
 	public static void printArray(int[] array) {
-		for (int i = 0; i < array.length; i ++) {
+		for (int i = 0; i < array.length; i++) {
 			out.print(array[i] + "\t");
 			if ((i + 1) % 10 == 0 && i > 0) {
 				out.println();
@@ -33,7 +33,7 @@ public class Tools {
 		}
 		out.println();
 	}
-	
+
 	/**
 	 * 因式分解
 	 * 
@@ -48,7 +48,7 @@ public class Tools {
 		}
 		for (; input != 1;) {
 			for (int i = 0; i < input; i++) {
-				int factor = Challenge1.getNthPrime(i);
+				int factor = getNthPrime(i);
 				if (input % factor == 0) {
 					factors.add(factor);
 					input /= factor;
@@ -58,27 +58,41 @@ public class Tools {
 		}
 		return factors;
 	}
-	
+
 	/**
-	 * 测试因式分解方法
+	 * 判断一个数是否为质数，如果质数数组填充完毕且这个数在数组的范围内，则到数组 中查找，如果数组未填充完毕，则用计算的方法来判断；
+	 * 
+	 * @param number
+	 *            要判断的数
+	 * @return 是质数则返回true
 	 */
-	private static void testYSFJ() {
-		ArrayList<Integer> factors = null;
-		for (int i = 0; i < 20; i++) {
-			factors = Tools.yinshifenjie(i);
-			out.println(i);
-			printFactors(factors);
-			out.println();
+	public static boolean isPrime(int number) {
+		if (number < 2) {
+			return false;
+		}
+		if (number == 2) {
+			return true;
+		}
+
+		if (number >= BOOL_PRIME_ARRAY_SIZE || !primeArrayInitialed) {
+			for (int i = 2; i <= Math.sqrt(number); i++) {
+				if (number % i == 0) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return booleanPrimeArray[number];
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private static void printFactors(ArrayList<Integer> factors) {
 		for (int i : factors) {
 			out.print(i + " ");
 		}
 	}
-	
-	
+
 	/**
 	 * 求a 和 b 的最大公约数
 	 * 
@@ -129,42 +143,129 @@ public class Tools {
 			return b;
 		}
 		long result = 1;
-		result = a / maxDivisor(a, b) * b ;//avoid integer overflow
+		result = a / maxDivisor(a, b) * b;// avoid integer overflow
 		return result;
 	}
 
-	/**
-	 * 测试最小公倍数方法 test the function minCommonMultiple(int a, int b)
-	 */
-	private static void testMinCommonMultiple() {
-		for (int i = 0; i < 21; i++) {
-			for (int j = 0; j < 21; j++) {
-				out.println("[" + i + ", " + j + "]: " + minCommonMultiple(i, j));
+	private static final int BOOL_PRIME_ARRAY_SIZE = 1000000;
+	private static final int INT_PRIME_ARRAY_SIZE = BOOL_PRIME_ARRAY_SIZE / 20;
+
+	// 质数数组，质数的位置为TRUE，合数的位置为FALSE
+	public static boolean[] booleanPrimeArray = new boolean[BOOL_PRIME_ARRAY_SIZE];
+	private static int[] intPrimeArray = new int[INT_PRIME_ARRAY_SIZE];
+	private static boolean primeArrayInitialed = false;
+
+	private static void initBoolPrimeArray() {
+		int lastPrime = 0;
+		int temp = lastPrime;
+		for (int i = 0; i < BOOL_PRIME_ARRAY_SIZE; i++) {
+			for (; temp < BOOL_PRIME_ARRAY_SIZE; temp++) {
+				if (isPrime(temp)) {
+					booleanPrimeArray[temp] = true;
+					lastPrime = temp;
+					temp++;
+					break;
+				}
 			}
 		}
 	}
 
-	/**
-	 * 测试最大公约数方法。
-	 * test the maxDivisor(int, int) method.
-	 */
-	private static void testMaxDivisor() {
-		for (int i = 0; i < 21; i++) {
-			for (int j = 0; j < 21; j++) {
-				out.println("[" + i + ", " + j + "]: " + maxDivisor(i, j));
+	private static void initIntPrimeArray() {
+		int pos = 0;
+		for (int i = 0; i < intPrimeArray.length; i++) {
+			while (!booleanPrimeArray[pos]) {
+				pos++;
 			}
+			intPrimeArray[i] = pos;
+			pos++;
 		}
 	}
 
-/**
- * 测试获取第n个素数方法
- */
-	private static void testGetNthPrime() {
-		for (int i = 0; i < 21;i ++) {
-			out.println(Challenge1.getNthPrime(i));
+	/**
+	 * 素数从小到大排列， 获取第n个素数
+	 * 
+	 * @param n
+	 * @return
+	 */
+	public static int getNthPrime(int n) {
+		if (n > INT_PRIME_ARRAY_SIZE) {
+			out.println(n + " is too big.");
+			throw new IndexOutOfBoundsException();
 		}
+		initPrimeArray();
+		return intPrimeArray[n];
+	}
+
+	public static void initPrimeArray() {
+		if (primeArrayInitialed) {
+			return;
+		}
+		initBoolPrimeArray();
+		initIntPrimeArray();
+		primeArrayInitialed = true;
+	}
+
+	/**
+	 * 返回字符串中字母的所有排列组合
+	 * @param input
+	 * @return
+	 */
+	public static HashSet<String> pailiezuhe(String input) {
+		HashSet<String> result = new HashSet<>();
+		if (input.length() <= 1) {
+			result.add(input);
+			return result;
+		}
+
+		for (int j = 0; j < input.length(); j++) {
+			String prefix = input.substring(0, j);
+			String suffix = input.substring(j + 1);
+			String tempInputStr = prefix + suffix;
+			// out.println(tempInputStr);
+			char ch = input.charAt(j);
+			HashSet<String> temp = pailiezuhe(tempInputStr);
+
+			for (String string : temp) {
+				result.addAll(insertChar2String(string, ch));
+			}
+		}
+		return result;
 	}
 	
+/**
+ * insert character ch into a position of the target string,
+ * return all the possible results
+ * @param target
+ * @param ch
+ * @return
+ */
+	private static ArrayList<String> insertChar2String(String target, char ch) {
+		ArrayList<String> result = new ArrayList<>();
+		result.add(ch + target);
+		result.add(target + ch);
+		for (int i = 0; i < target.length(); i++) {
+			String temp = target.substring(0, i) + ch + target.substring(i);
+			result.add(temp);
+		}
+		return result;
+	}
+
+	private static void testPailiezuhe() {
+		HashSet<String> results = pailiezuhe("abcdef");
+		for (String str : results) {
+			out.println(str);
+		}
+	}
+
+	private static void testInsertChar() {
+		String target = "hello world!";
+		char ch = '*';
+		ArrayList<String> result = insertChar2String(target, ch);
+		for (String str : result) {
+			out.println(str);
+		}
+	}
+
 	public static void main(String[] args) {
 		int[] array = generateArray(30);
 		printArray(array);

@@ -4,60 +4,11 @@ import static java.lang.System.out;
 
 import java.util.Arrays;
 
+import tools.Tools;
+
 public class Challenge1 {
 
-	private static final int BOOL_PRIME_ARRAY_SIZE = 1000000;
-	private static final int INT_PRIME_ARRAY_SIZE = BOOL_PRIME_ARRAY_SIZE / 20;
 	
-	// 质数数组，质数的位置为TRUE，合数的位置为FALSE
-	public static boolean[] booleanPrimeArray = new boolean[BOOL_PRIME_ARRAY_SIZE];
-	private static int[] intPrimeArray = new int[INT_PRIME_ARRAY_SIZE];
-	private static boolean primeArrayInitialed = false;
-
-	private static void initBoolPrimeArray() {
-		int lastPrime = 0;
-		int temp = lastPrime;
-		for (int i = 0; i < BOOL_PRIME_ARRAY_SIZE; i++) {
-			for (; temp < BOOL_PRIME_ARRAY_SIZE; temp++) {
-				if (isPrime(temp)) {
-					booleanPrimeArray[temp] = true;
-					lastPrime = temp;
-					temp++;
-					break;
-				}
-			}
-		}
-	}
-
-	private static void initIntPrimeArray() {
-		int pos = 0;
-		for (int i = 0; i < intPrimeArray.length;i ++) {
-			while (!booleanPrimeArray[pos]) {
-				pos ++;
-			}
-			intPrimeArray[i] = pos;
-			pos ++;
-		}
-	}
-
-	public static int getNthPrime(int n) {
-		if (n > INT_PRIME_ARRAY_SIZE) {
-			out.println(n + " is too big.");
-			throw new IndexOutOfBoundsException();
-		}
-		initPrimeArray();
-		return intPrimeArray[n];
-	}
-
-	public static void initPrimeArray() {
-		if (primeArrayInitialed) {
-			return;
-		}
-		initBoolPrimeArray();
-		initIntPrimeArray();
-		primeArrayInitialed = true;
-	}
-
 	@SuppressWarnings("unused")
 	private static void test() {
 		/*
@@ -108,34 +59,7 @@ public class Challenge1 {
 		return result;
 	}
 
-	/**
-	 * 判断一个数是否为质数，如果质数数组填充完毕且这个数在数组的范围内，则到数组 中查找，如果数组未填充完毕，则用计算的方法来判断；
-	 * 
-	 * @param number
-	 *            要判断的数
-	 * @return 是质数则返回true
-	 */
-	public static boolean isPrime(int number) {
-		if (number < 2) {
-			return false;
-		}
-		if (number == 2) {
-			return true;
-		}
-
-		if (number >= BOOL_PRIME_ARRAY_SIZE || !primeArrayInitialed) {
-			for (int i = 2; i <= Math.sqrt(number); i++) {
-				if (number % i == 0) {
-					return false;
-				}
-			}
-			return true;
-		} else {
-			return booleanPrimeArray[number];
-		}
-
-	}
-
+	
 	/**
 	 * 12345以内有多少个素数
 	 * 
@@ -145,7 +69,7 @@ public class Challenge1 {
 	private static int findPrime() {
 		int result = 0;
 		for (int i = 2; i <= 12345; i++) {
-			if (isPrime(i)) {
+			if (Tools.isPrime(i)) {
 				result++;
 			}
 		}
@@ -156,7 +80,7 @@ public class Challenge1 {
 	private static int addPrimes() {
 		int result = 0;
 		for (int i = 2; i <= 100; i++) {
-			if (isPrime(i)) {
+			if (Tools.isPrime(i)) {
 				result += i;
 			}
 		}
@@ -200,7 +124,7 @@ public class Challenge1 {
 				i = 2;
 			}
 		}
-		if (isPrime(number) && number > result) {
+		if (Tools.isPrime(number) && number > result) {
 			return number;
 		}
 		return result;
@@ -278,7 +202,7 @@ public class Challenge1 {
 	private static int luanShengZhiShu(int start, int end) {
 		int result = 0;
 		for (int i = start; i < end - 2; i++) {
-			if (isPrime(i) && isPrime(i + 2)) {
+			if (Tools.isPrime(i) && Tools.isPrime(i + 2)) {
 				result++;
 			}
 		}
@@ -453,14 +377,14 @@ public class Challenge1 {
 				out.println("j: " + j);
 			}
 			for (int i = j; tempResult <= bound; i++) {
-				if (isPrime(i)) {
+				if (Tools.isPrime(i)) {
 					lastPrime = i;
 					primes[arrayIndex++] = lastPrime;
 					tempResult += lastPrime;
 					numberLen++;
 				}
 			}
-			while (!isPrime(tempResult) || tempResult > bound) {
+			while (!Tools.isPrime(tempResult) || tempResult > bound) {
 				tempResult -= primes[--arrayIndex];
 				if (arrayIndex == 0) {
 					break;
@@ -503,7 +427,7 @@ public class Challenge1 {
 		// initPrimeArray();
 		// findContinuousPrimeSum(10000000);
 		for (int i = 0; i < 10; i++) {
-			out.println(getNthPrime(i));
+			out.println(Tools.getNthPrime(i));
 		}
 	}
 

@@ -2,14 +2,9 @@ package aha_chanllenge;
 
 import static java.lang.System.out;
 
-import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 import tools.Tools;
 
@@ -45,6 +40,7 @@ public class Challenge2 {
 	/**
 	 * 问题地址：http://tz.ahalei.com/problems/view/18
 	 */
+	@SuppressWarnings("unused")
 	private static int xiaoming() {
 		for (int i = 1; i < 100; i++) {
 			for (int j = 0; j < 100; j++) {
@@ -62,6 +58,7 @@ public class Challenge2 {
 		return result;
 	}
 
+	@SuppressWarnings("unused")
 	private static int xiaoming2() {
 		int result = 0;
 		initFactorArray(factorArray);
@@ -73,34 +70,22 @@ public class Challenge2 {
 		return result;
 	}
 
-	private static int findFactor(int number) {
+	/**
+	 * 返回number有多少个约数
+	 * @param number
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	private static int findDivior(int number) {
 		int result = 0;
-		for (int i = 1; i < number; i++) {
+		for (int i = 1; i <= number; i++) {
 			out.println(i);
 			if (number % i == 0) {
-				out.println("find one \nresult: " + result);
+				out.println("find one result: " + result);
 				result++;
 			}
 		}
 		return result;
-	}
-
-	/**
-	 * 查找第n个素数
-	 * 
-	 * @param n
-	 */
-	private static int findTheNthPrime(int n) {
-		Challenge1.initPrimeArray();
-		int pos = 0;
-		for (int i = -1; i != n - 1;) {
-			if (Challenge1.booleanPrimeArray[pos++]) {
-				i++;
-			}
-		}
-		pos--;
-		out.println("the " + n + " prime is " + pos);
-		return pos;
 	}
 
 	/**
@@ -109,12 +94,12 @@ public class Challenge2 {
 	 * @param n
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private static int gedebahe(int n) {
 		int result = 0;
-		int middle = n / 2;
 		for (int i = 2; i <= n / 2; i++) {
 			int j = n - i;
-			if (Challenge1.isPrime(i) && Challenge1.isPrime(j)) {
+			if (Tools.isPrime(i) && Tools.isPrime(j)) {
 				out.println(i + " + " + j + " = " + n);
 				result++;
 			}
@@ -154,6 +139,7 @@ public class Challenge2 {
 	 * 
 	 * @param n
 	 */
+	@SuppressWarnings("unused")
 	private static void findLongestStepsOfKalaziChange(long n) {
 		int temp = 0;
 		int max = 0;
@@ -168,6 +154,7 @@ public class Challenge2 {
 		out.println(num + " " + max);
 	}
 
+	@SuppressWarnings("unused")
 	private static void testLog4j() {
 		out.println("begin logging...");
 		logger.info(" 这里是测试log4j 的代码");
@@ -192,8 +179,8 @@ public class Challenge2 {
 	public static void main(String[] args) throws Exception {
 //		out.println(hanks(41, 1, 96, 288));
 //		testGetNthPrime();
-		out.println(hanks(8085, 105, 1532, 11099340));
-		
+//		out.println(hanks(8085, 105, 1532, 11099340));
+//		out.println(findFactor(5));
 	}
 
 }
