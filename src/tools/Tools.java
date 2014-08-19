@@ -232,7 +232,16 @@ public class Tools {
 		return result;
 	}
 	
-/**
+	/**
+	 * 另一种方法，效率提高两倍多
+	 * @param string
+	 * @return
+	 */
+	public static HashSet<String> pailiezuhe2(String string) {
+		return Pailiezuhe.pailiezuhe(string);
+	}
+	
+	/**
  * insert character ch into a position of the target string,
  * return all the possible results
  * @param target
@@ -250,13 +259,37 @@ public class Tools {
 		return result;
 	}
 
-	private static void testPailiezuhe() {
-		HashSet<String> results = pailiezuhe("abcdef");
+	private static void testPailiezuhe(String input) {
+		HashSet<String> results = pailiezuhe(input);
 		for (String str : results) {
 			out.println(str);
 		}
 	}
 
+	private static void testPailiezuheFromClass(String input) {
+		HashSet<String> results = Pailiezuhe.pailiezuhe(input);
+		for (String str : results) {
+			out.println(str);
+		}
+	}
+	
+	private static void compareTwoMethods() {
+		String input = "123456789";
+		long begin1 = System.currentTimeMillis();
+		testPailiezuhe(input);
+		long end1 = System.currentTimeMillis();
+		
+		long begin2 = System.currentTimeMillis();
+		testPailiezuheFromClass(input);
+		long end2 = System.currentTimeMillis();
+		
+		long mytime = end1 - begin1;
+		long ahatime = end2 - begin2;
+		
+		out.println("my method: " + mytime);
+		out.println("ahalei's method: " + ahatime);
+	}
+	
 	private static void testInsertChar() {
 		String target = "hello world!";
 		char ch = '*';
@@ -267,7 +300,8 @@ public class Tools {
 	}
 
 	public static void main(String[] args) {
-		int[] array = generateArray(30);
-		printArray(array);
+//		int[] array = generateArray(30);
+//		printArray(array);
+		compareTwoMethods();
 	}
 }
