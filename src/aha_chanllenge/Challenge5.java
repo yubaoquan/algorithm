@@ -30,8 +30,16 @@ public class Challenge5 {
 		out.println("totally " + result + " solutions");
 	}
 	
+	private static void challenge43() {
+		for (int i = 1;i <= 9; i ++) {
+			if ((10 * i  + 3) * 6528 == (30 + i ) * 8256) {
+				out.println(i);
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
-		challenge22();
+		challenge43();
 
 	}
 
