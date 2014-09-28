@@ -13,11 +13,11 @@ public class Tree {
 		if(node.left != null){
 			traverse(node.left);
 		}
-		System.out.print(node.value + " , ");//-------------------->ÕâÊÇÖÐÐò±éÀú
+		System.out.print(node.value + " , ");//-------------------->ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(node.right != null){
 			traverse(node.right);
 		}
-		//System.out.print(node.value + " , ");//------------------>ÕâÊÇºóÐò±éÀú
+		//System.out.print(node.value + " , ");//------------------>ï¿½ï¿½ï¿½Çºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 	public Node buildInorderPreorder(int[] pre,int n, int offset){  
 	    if (n == 0) {
