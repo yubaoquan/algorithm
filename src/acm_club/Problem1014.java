@@ -1,4 +1,4 @@
-package temp;
+package acm_club;
 
 import java.util.Arrays;
 import java.util.Scanner;
