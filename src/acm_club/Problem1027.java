@@ -29,14 +29,11 @@ public class Problem1027 {
 	}
 
 	public static void main(String[] args) {
-		StringBuffer sb = new StringBuffer();
 		Scanner sc = new Scanner(System.in);
 		while (sc.hasNext()) {
 			String number = sc.nextLine();
 			number = number.replace(" ",	 "");
-			sb.append(drawAllNumbers(number));
-//			System.out.println(sb);
+			System.out.print(drawAllNumbers(number));
 		}
-		System.out.print(sb);
 	}
 }

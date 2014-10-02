@@ -16,7 +16,6 @@ public class Problem1028 {
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		StringBuffer sb = new StringBuffer();
 		double speed = 0.0;
 		double distance = 0;
 		String previousTimeStr = "00:00:00";
@@ -28,13 +27,11 @@ public class Problem1028 {
 			distance += speed * period;
 			
 			if (input.length() == 8) {
-				sb.append(String.format("%s %.2f km\n", timeStr, distance));
+				System.out.format("%s %.2f km\n", timeStr, distance);
 			} else {
 				int newSpeed = Integer.parseInt(input.substring(9));
 				speed = newSpeed;
 			}
 		}
-		System.out.print(sb);
 	}
-
 }
