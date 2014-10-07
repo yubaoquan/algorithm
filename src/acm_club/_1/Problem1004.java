@@ -24,7 +24,7 @@ public class Problem1004 {
 			result.append("\n");
 		}
 		System.out.println(result);
-
+		sc.close();
 	}
 
 }

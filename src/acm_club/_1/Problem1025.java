@@ -16,7 +16,7 @@ public class Problem1025 {
 	 */
 	private static int kind(int n, int m) {
 		int count = 0;
-		int remain ;
+		int remain;
 		for (int i = 0; i <= n; i++) {
 			if (5 * i > m) {
 				break;
@@ -48,6 +48,6 @@ public class Problem1025 {
 		for (int i = 0; i < row; i++) {
 			System.out.println(result[i]);
 		}
+		sc.close();
 	}
-
 }

@@ -14,7 +14,7 @@ public class Problem1040 {
 			int middle = str1.length() / 2;
 			System.out.println(str1.substring(0, middle) + str2 + str1.substring(middle, str1.length()));
 		}
-
+		sc.close();
 	}
 
 }

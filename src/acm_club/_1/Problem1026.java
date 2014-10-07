@@ -60,5 +60,6 @@ public class Problem1026 {
 			sb.append("\n");
 		}
 		System.out.println(sb);
+		sc.close();
 	}
 }

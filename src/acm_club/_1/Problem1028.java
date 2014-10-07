@@ -33,5 +33,6 @@ public class Problem1028 {
 				speed = newSpeed;
 			}
 		}
+		sc.close();
 	}
 }

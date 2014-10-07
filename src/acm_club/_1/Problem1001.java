@@ -16,7 +16,7 @@ public class Problem1001 {
 		for (int i = 0; i < rows;i ++) {
 			System.out.println(result[i]);
 		}
-
+		sc.close();
 	}
 
 }

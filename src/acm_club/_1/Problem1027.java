@@ -35,5 +35,6 @@ public class Problem1027 {
 			number = number.replace(" ",	 "");
 			System.out.print(drawAllNumbers(number));
 		}
+		sc.close();
 	}
 }
