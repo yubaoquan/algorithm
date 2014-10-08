@@ -1,7 +1,6 @@
 package tools;
 
 import java.util.HashSet;
-import static java.lang.System.*;
 
 public class Pailiezuhe {
 
