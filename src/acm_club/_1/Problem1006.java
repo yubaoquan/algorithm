@@ -14,7 +14,7 @@ public class Problem1006 {
 			result.append("\n\n");
 		}
 		System.out.println(result);
-
+		sc.close();
 	}
 
 }

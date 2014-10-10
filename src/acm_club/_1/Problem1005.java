@@ -23,5 +23,6 @@ public class Problem1005 {
 			result.append("\n");
 		}
 		System.out.println(result);
+		sc.close();
 	}
 }
