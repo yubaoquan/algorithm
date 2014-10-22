@@ -1,10 +1,8 @@
 package aha_chanllenge;
 
 import static java.lang.System.out;
-
-import java.util.Arrays;
-
 import tools.Tools;
+
 
 public class Challenge1 {
 
